@@ -3,11 +3,15 @@
 1. Download [docker](https://www.docker.com/products/docker-desktop/)
 2. Run [script](./keycloak.ps1) on windows machines or [script](keycloak.sh) on unix
 3. Login into [admin console](http://localhost:8443) with username: admin and password:admin
-4. Import realm using [file](./realm-export.json)
+4. Add new realm
 
-![img.png](docs/img/img_5.png)
+![image](https://user-images.githubusercontent.com/35529114/226174635-9bb8d6d5-c9e5-4555-b11a-a637c5f70460.png)
 
-5. Ensue that users, groups and roles pages looks like beneath:
+5. Import realm using [file](./realm-export.json)
+
+![image](https://user-images.githubusercontent.com/35529114/226174677-add686fd-f794-4a09-bd88-de07a5a8933c.png)
+
+6. Ensue that users, groups and roles pages looks like beneath:
 
 ![img.png](docs/img/img.png)
 
@@ -20,7 +24,7 @@ Roles:
 Group-Role mappings:
 ![img3.png](docs/img/img_3.png)
 
-ensure that all groups ale related to proper mappings and users, sample contains only example for admin
+Ensure that all groups ale related to proper mappings and users, sample contains only example for admin
 
 User-Group mappings:
 
