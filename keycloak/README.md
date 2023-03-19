@@ -13,7 +13,7 @@
 
 6. Ensue that users, groups and roles pages looks like beneath:
 
-![img.png](docs/img/img.png)
+![image](https://user-images.githubusercontent.com/35529114/226176879-887a59a5-c472-4215-b4d8-5b7a2e32bff2.png)
 
 Groups:
 ![img_1.png](docs/img/img_1.png)
