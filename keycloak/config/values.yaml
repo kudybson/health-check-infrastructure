@@ -1,0 +1,36 @@
+# Default values for config.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+namespace: default
+app:
+  name: keycloak
+
+spec:
+  containers:
+    app:
+      port: 8080
+    image: quay.io/keycloak/keycloak:17.0.0
+    imagePullPolicy: IfNotPresent
+  restartPolicy: OnFailure
+
+env:
+  keycloak:
+    admin:
+      username: admin
+      password: admin
+    health:
+      port: 8080
+      liveness:
+        path: /health/live
+      readiness:
+        path: /health/ready
+    proxy: edge
+# gateway
+gateway: health-check-gateway
+
+# service
+service:
+  type: ClusterIP
+  port: 80

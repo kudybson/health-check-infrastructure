@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{.Values.namespace}}
+  name: {{ .Values.app.name }}
+  labels:
+    app: {{ .Values.app.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      containers:
+        - name: {{ .Values.app.name }}
+          image: {{.Values.spec.containers.image}}
+          imagePullPolicy: {{ .Values.spec.containers.imagePullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{.Values.spec.containers.app.port}}
+              protocol: TCP
+          env:
+            - name: KEYCLOAK_ADMIN
+              value: {{.Values.env.keycloak.admin.username}}
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: {{.Values.env.keycloak.admin.password}}
+            - name: KC_HOSTNAME_STRICT
+              value: "false"
+            - name: KC_HEALTH_ENABLED
+              value: "true"
+            - name: KC_PROXY
+              value: {{.Values.env.keycloak.proxy}}
+          command: [ "/opt/keycloak/bin/kc.sh" ]
+          args: [ "start-dev" ]
+          readinessProbe:
+            httpGet:
+              path: {{.Values.env.keycloak.health.readiness.path}}
+              port: {{.Values.env.keycloak.health.port}}
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          livenessProbe:
+            httpGet:
+              path: {{.Values.env.keycloak.health.liveness.path}}
+              port: {{ .Values.env.keycloak.health.port}}
+            initialDelaySeconds: 30
+            timeoutSeconds: 30

@@ -1,7 +1,7 @@
 # How to setup authorization server locally:
 
 1. Download [docker](https://www.docker.com/products/docker-desktop/)
-2. Run [script](./keycloak.bat) on windows machines or [script](keycloak.sh) on unix
+2. Run [script](docker/keycloak.bat) on windows machines or [script](docker/keycloak.sh) on unix
 3. Login into [admin console](http://localhost:8443) with username: admin and password:admin
 4. Add new realm
 
