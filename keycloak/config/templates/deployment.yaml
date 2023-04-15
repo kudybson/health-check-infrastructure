@@ -30,21 +30,35 @@ spec:
               value: {{.Values.env.keycloak.admin.password}}
             - name: KC_HOSTNAME_STRICT
               value: "false"
+            - name: KC_HOSTNAME_STRICT_HTTPS
+              value: "false"
             - name: KC_HEALTH_ENABLED
               value: "true"
             - name: KC_PROXY
               value: {{.Values.env.keycloak.proxy}}
+            - name: KC_HTTP_RELATIVE_PATH
+              value: /keycloak
+            - name: HTTP_ADDRESS_FORWARDING
+              value: "true"
+            - name: KC_HTTP_ENABLED
+              value: "true"
+{{/*            - name: KC_FEATURES*/}}
+{{/*              value: token-exchange*/}}
+            - name: PROXY_ADDRESS_FORWARDING
+              value: "true"
+            - name: KC_HOSTNAME_STRICT_BACKCHANNEL
+              value: "false"
           command: [ "/opt/keycloak/bin/kc.sh" ]
           args: [ "start-dev" ]
           readinessProbe:
             httpGet:
-              path: {{.Values.env.keycloak.health.readiness.path}}
+              path: {{.Values.env.keycloak.health.readiness.path}}keycloak
               port: {{.Values.env.keycloak.health.port}}
-            initialDelaySeconds: 30
+            initialDelaySeconds: 80
             timeoutSeconds: 30
           livenessProbe:
             httpGet:
-              path: {{.Values.env.keycloak.health.liveness.path}}
+              path: {{.Values.env.keycloak.health.liveness.path}}keycloak
               port: {{ .Values.env.keycloak.health.port}}
-            initialDelaySeconds: 30
+            initialDelaySeconds: 80
             timeoutSeconds: 30

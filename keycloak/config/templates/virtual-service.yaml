@@ -8,6 +8,11 @@ spec:
   gateways:
     - {{.Values.gateway}}
   http:
-    - route:
+    - match:
+        - uri:
+            prefix: {{.Values.env.keycloak.prefix}}
+      route:
         - destination:
             host: {{.Values.app.name}}
+            port:
+              number: {{.Values.service.port}}

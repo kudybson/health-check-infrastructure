@@ -17,15 +17,16 @@ spec:
 
 env:
   keycloak:
+    prefix: /auth
     admin:
       username: admin
       password: admin
     health:
       port: 8080
       liveness:
-        path: /health/live
+        path: /
       readiness:
-        path: /health/ready
+        path: /
     proxy: edge
 # gateway
 gateway: health-check-gateway
