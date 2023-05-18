@@ -37,7 +37,7 @@ spec:
             - name: KC_PROXY
               value: {{.Values.env.keycloak.proxy}}
             - name: KC_HTTP_RELATIVE_PATH
-              value: /keycloak
+              value: {{.Values.env.keycloak.prefix}}
             - name: HTTP_ADDRESS_FORWARDING
               value: "true"
             - name: KC_HTTP_ENABLED
@@ -52,13 +52,13 @@ spec:
           args: [ "start-dev" ]
           readinessProbe:
             httpGet:
-              path: {{.Values.env.keycloak.health.readiness.path}}keycloak
+              path: {{.Values.env.keycloak.health.readiness.path}}
               port: {{.Values.env.keycloak.health.port}}
             initialDelaySeconds: 80
             timeoutSeconds: 30
           livenessProbe:
             httpGet:
-              path: {{.Values.env.keycloak.health.liveness.path}}keycloak
+              path: {{.Values.env.keycloak.health.liveness.path}}
               port: {{ .Values.env.keycloak.health.port}}
             initialDelaySeconds: 80
             timeoutSeconds: 30

@@ -24,9 +24,9 @@ env:
     health:
       port: 8080
       liveness:
-        path: /
+        path: /auth
       readiness:
-        path: /
+        path: /auth
     proxy: edge
 # gateway
 gateway: health-check-gateway
